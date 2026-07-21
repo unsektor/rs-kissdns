@@ -83,17 +83,17 @@ jobs:
 
             echo '```'
             echo dig @127.0.0.1 -p 5533 dev.demo
-          } > "$GITHUB_STEP_SUMMARY"
+          } >> "$GITHUB_STEP_SUMMARY"
           
           dig @127.0.0.1 -p 5533 dev.demo | tee -a "$GITHUB_STEP_SUMMARY" | grep -q 172.0.0.1 || export EXIT_CODE=1
           
           {
             echo dig @127.0.0.1 -p 5533 sub.test.demo || export EXIT_CODE=1
             echo '```' 
-          } > "$GITHUB_STEP_SUMMARY"
+          } >> "$GITHUB_STEP_SUMMARY"
           
           dig @127.0.0.1 -p 5533 sub.test.demo | tee -a "$GITHUB_STEP_SUMMARY" | grep -q 10.0.0.5 || export EXIT_CODE=1
-          echo '```' > "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
           
           docker container stop "$container_id"
           exit "$EXIT_CODE"
